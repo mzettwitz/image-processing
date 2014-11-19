@@ -22,6 +22,8 @@
 ## Author: Micha <Micha@KINGCOTTON>
 ## Created: 2014-11-12
 
+% function to solve task 7
+
 function B = filter (A,radius)
 
 B = zeros(size(A,1),size(A,2));

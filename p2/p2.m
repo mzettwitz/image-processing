@@ -36,6 +36,6 @@ figure;
 imshow([fft5(fftshifted,2,6), fft5(fftshifted,-2,-6), 
 fft5(fftshifted,2,-6), fft5(fftshifted,14,-3)], []);
 
-%task 7, looks weird
+%task 7, looks weird 
 figure;
 imshow(filter(fftshifted,18),[]);
