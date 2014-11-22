@@ -11,3 +11,22 @@ clear pathname filename;
 %show original image
 imshow(original);
 title('input image');
+
+%generate PSF
+
+
+
+
+
+
+
+
+%fft image and psf, reduce error
+
+
+
+%show corrected image 
+
+ 
+
+
