@@ -1,6 +1,6 @@
 ## Author: Martin Zettwitz, Michael Größler
 
-## Function to compute and return a PSF matrix
+## Function to compute and return a PSF matrix with 45° and given distance
 
 function h = psf (original_image, distance)
 

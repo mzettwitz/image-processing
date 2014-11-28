@@ -1,4 +1,5 @@
 ##Author: Michael Größler, Martin Zettwitz
+#Function to implement a Wiener filter to correct blurred images
 
 function corImg = wienerFilter (G, H, K)
 
@@ -15,6 +16,7 @@ for u= 1:size(corImg,1)
     corImg(u,v) = G(u,v) * ((abs(H(u,v))^2)/(H(u,v)*(abs(H(u,v))^2 + K)));
   end
 end
+
 corImg = ifftshift(ifft2(corImg));
 
 endfunction
