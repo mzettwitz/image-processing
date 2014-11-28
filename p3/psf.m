@@ -2,7 +2,7 @@
 
 ## Function to compute and return a PSF matrix
 
-function [h] = psf (original_image, distance)
+function h = psf (original_image, distance)
 
   h = zeros(size(original_image));
  

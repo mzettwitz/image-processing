@@ -18,21 +18,24 @@ figure();
 imshow(h);
 title('psf');
 
-#transform image and psf
-F = fft2(fftshift(original));
-H = fft2(fftshift(h));
+%fft original and psf into frequency domain
+F = fft2(original);
+F = fftshift(F);
+H = fft2(h);
+H = fftshift(H); 
 
-%inverse image and psf
-G = F./H;
+% inverse filtering 
+G = F./H;  
 
-%transform new image g into spatial room and show it
-g = ifftshift(ifft2(G));
+g = ifft2(ifftshift(G));
 
-#show corrected image 
 figure();
-imshow(g);
-title('fft image and psf');
+imshow(fftshift(g));
+title('inverse filtering');
  
 #use wienerFilter to correct image, and show, find appropriate value of K
-
+wienie = wienerFilter(F, H, 0.01);
+figure();
+imshow(wienie);
+title('corrected image using wiener filter');
 
