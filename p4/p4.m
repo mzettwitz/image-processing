@@ -42,6 +42,17 @@ rle8Image = cellFunction(cellFunction(quant8Image,@zigzag),@rle_enc);
 rle16Image = cellFunction(cellFunction(quant16Image,@zigzag),@rle_enc);
 #calculate compressionrate
 
+#use entries in original image(pixels) compared to entries in rle version
+#get rle for every cell , add up
+rle8mat = cell2mat(cellFunction(rle8Image,@length));
+rle16mat = cell2mat(cellFunction(rle16Image,@length));
+
+rle8Size = size(rle8mat,1) * size(rle8mat,2);
+rle16Size = size(rle16mat,1) * size(rle16mat,2);
+originalSize = size(original,1) * size(original,2);
+
+comp8Rate = originalSize/rle8Size;
+comp16Rate = originalSize/rle16Size;
 
 #6.reverse the last steps and transform into spatial domain
 
@@ -60,10 +71,10 @@ komp16Image = cell2mat(idct16Image);
 
 figure;
 imshow(komp8Image,[]);
-title(['M = 8 ']);
+title(comp8Rate);
 
 figure;
 imshow(komp16Image,[]);
-title(['M = 16 ']);
+title(comp16Rate);
 #answer to last question
 #(what are differences between block sizes and different pictures, why?)
