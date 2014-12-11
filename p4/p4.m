@@ -1,5 +1,5 @@
-## Authors: Michael Größler, Martin Zettwitz
-## programming task 4
+## Authors: Michael Groessler, Martin Zettwitz
+## programming task : 4
 
 close all;clear;
 
@@ -15,8 +15,6 @@ title('input image');
 #2.seperate imag into M x M blocks(8|16)
 m =[8 16];
 
-#used for 'Uniformoutput'
-uni = 'Uniformoutput'
 # m(1) = 8 , m(2) = 16
 #create vectors of blocksize needed for mat2cell
 rows8 = ones(1,size(original,1)/m(1)) * m(1);
@@ -31,31 +29,30 @@ b8Image = mat2cell(original,rows8,cols8);
 #blocksize of 16x16
 b16Image = mat2cell(original,rows16,cols16);
 #3.DCT into frequency domain
-dct8Image = cellfun(@dct2,b8Image, uni, false);
-dct16Image = cellfun(@dct2,b16Image, uni, false);
+dct8Image = cellFunction(b8Image,@dct2);
+dct16Image = cellFunction(b16Image,@dct2);
 #4.quantization of frequencies
 load('quantm.mat');
 
-quant8Image = cellfun(@(x)  round(x ./quant8) , dct8Image, uni, false);
-quant16Image = cellfun(@(x) round(x ./ quant16), dct16Image, uni, false);
+quant8Image = cellFunction(dct8Image,@(x)  round(x ./quant8));
+quant16Image = cellFunction(dct16Image,@(x) round(x ./ quant16));
 #5.sort data(zig-zag) and encode them with run-length
 
-rle8Image = cellfun(@rle_enc,(cellfun(@zigzag, quant8Image, uni, false)),uni, false);
-rle16Image = cellfun(@rle_enc,(cellfun(@zigzag, quant16Image, uni, false)),uni, false);
-
+rle8Image = cellFunction(cellFunction(quant8Image,@zigzag),@rle_enc);
+rle16Image = cellFunction(cellFunction(quant16Image,@zigzag),@rle_enc);
 #calculate compressionrate
 
 
 #6.reverse the last steps and transform into spatial domain
 
-re8Image = cellfun(@zagzig,(cellfun(@rle_dec,rle8Image, uni,false)),uni,false);
-re16Image = cellfun(@zagzig,(cellfun(@rle_dec,rle16Image, uni,false)),uni,false);
+re8Image = cellFunction(cellFunction(rle8Image,@rle_dec),@zagzig);
+re16Image = cellFunction(cellFunction(rle16Image,@rle_dec),@zagzig);
 
-deQuant8Image = cellfun(@(x) x .* quant8 , re8Image, 'Uniformoutput', false);
-deQuant16Image = cellfun(@(x) x .* quant16 , re16Image, 'Uniformoutput', false);
+deQuant8Image = cellFunction(re8Image,@(x) x .* quant8);
+deQuant16Image = cellFunction(re16Image,@(x) x .* quant16);
 
-idct8Image = cellfun(@idct2,deQuant8Image, 'Uniformoutput', false);
-idct16Image = cellfun(@idct2,deQuant16Image, 'Uniformoutput', false);
+idct8Image = cellFunction(deQuant8Image,@idct2);
+idct16Image = cellFunction(deQuant16Image,@idct2);
 
 komp8Image = cell2mat(idct8Image);
 komp16Image = cell2mat(idct16Image);
