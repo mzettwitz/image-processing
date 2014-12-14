@@ -47,8 +47,8 @@ rle16Image = cellFunction(cellFunction(quant16Image,@zigzag),@rle_enc);
 rle8mat = cell2mat(cellFunction(rle8Image,@length));
 rle16mat = cell2mat(cellFunction(rle16Image,@length));
 
-rle8Size = size(rle8mat,1) * size(rle8mat,2);
-rle16Size = size(rle16mat,1) * size(rle16mat,2);
+rle8Size = sum(rle8mat(:));
+rle16Size = sum(rle16mat(:));
 originalSize = size(original,1) * size(original,2);
 
 comp8Rate = originalSize/rle8Size;
