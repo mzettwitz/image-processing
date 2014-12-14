@@ -1,7 +1,7 @@
 ## Authors: Michael Groessler, Martin Zettwitz
 ## programming task : 4
 
-close all;clear;
+#close all;clear;
 
 #get image
 [filename, pathname] = uigetfile('*.bmp', 'Select image');
