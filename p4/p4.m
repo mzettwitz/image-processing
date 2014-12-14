@@ -85,18 +85,18 @@ title(['Compressionrate = ' num2str(comp16Rate)]);
 
 
 #M = 8
-#Das Bild ist kontrastschwächer als das Originalbild oder das M = 16 Bild
+#Das Bild ist kontrastschwaecher als das Originalbild oder das M = 16 Bild
 #
 #M = 16
-#Dieses Bild weißt keine große Veränderung zum Original auf, 
-#Änderungen sind nur zu erkennen, wenn man ranzoomt
+#Dieses Bild weisst keine große Veraenderung zum Original auf, 
+#Aenderungen sind nur zu erkennen, wenn man ranzoomt
 #
-#Die höhere Kompressionsrate und die schlechtere Qualität des M = 8 Bildes
-#stehen im Zusammenhang mit der gewählten Quantisierungsmatrix. Da durch 
-#diese stärker quantisiert wird und mehr Werte zu 0 gesetzt werden, ist
+#Die hoehere Kompressionsrate und die schlechtere Qualitaet des M = 8 Bildes
+#stehen im Zusammenhang mit der gewaehlten Quantisierungsmatrix. Da durch 
+#diese staerker quantisiert wird und mehr Werte zu 0 gesetzt werden, ist
 #das Bild dementsprechend schlechter.
-#Für M = 16 sind die Quantisierungskoeffizienten relativ klein, so dass
+#Fuer M = 16 sind die Quantisierungskoeffizienten relativ klein, so dass
 #viele Frequenzen nahe des Mittelpunkts beibehalten werden. Dadurch sinkt
-#natürlich die Kompressionsrate. Allerdings bleibt die Bildqualität gut erhalten.
+#natuerlich die Kompressionsrate. Allerdings bleibt die Bildqualitaet gut erhalten.
 #
 
