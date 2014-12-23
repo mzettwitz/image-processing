@@ -12,13 +12,26 @@ clear pathname filename;
 figure('Name','Input Image','NumberTitle','off');
 imshow(original);
 
+#filter collection
+smooth3 = zeros(3,3);
+smooth3 = smooth3 * 0.9;
+
+edge3 = zeros(3,3);
+edge3(1,2) = 1;
+edge3(2,1:2:3) = 1;
+edge3(2,2) = -4;
+edge3(3,2) = 1;
+
 
 %2
 #test own implemented spatial filter with a smoothing filter 
 #and an edge filter, use different sizes for the filter kernel
+smooth = spatial_filter(original, smooth3);
+
 
 #show spatial filterd images
-
+figure();
+imshow(smooth,[]);
 
 %4
 #test filters in frequency domain
