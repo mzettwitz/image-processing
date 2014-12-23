@@ -33,7 +33,7 @@ edge3(3,2) = 1;
 #and an edge filter, use different sizes for the filter kernel
 #smooth_im3 = spatial_filter(original, smooth3);
 #smooth_im5 = spatial_filter(original, smooth5);
-edge_im3 = spatial_filter(original, edge3);
+#edge_im3 = spatial_filter(original, edge3);
 #edge_imsobel = spatial_filter(original, edge_sobel);
 
 #show spatial filterd images
@@ -45,18 +45,23 @@ edge_im3 = spatial_filter(original, edge3);
 #imshow(smooth_im5,[]);
 #title('spatial-smooth-5');
 
-figure();
-imshow(edge_im3,[]);
-title('spatial-edge-3');
+#figure();
+#imshow(edge_im3,[]);
+#title('spatial-edge-3');
 
 #figure();
 #imshow(edge_imsobel, []);
 #title('spatial-edge-sobel-1d');
 
+
 %4
 #test filters in frequency domain
+smooth_im3_f = frequency_filter(original,smooth3);
 
 #show frequency filtered images
+figure();
+imshow(abs(log(smooth_im3_f)),[]);
+title('frequency-smooth-3');
 
 #compute the differences in the pictures
 
