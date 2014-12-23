@@ -25,6 +25,7 @@ img_mid_y = floor(size(img,2)/2);   #center of y values
 for col = (-k_size2):(k_size2)      #iterate through kernel size
   for row = (-k_size2):(k_size2)    #iterate through kernel size
     #put the values of the kernel into the center of the mask
+    #col+k_size-k_size2 to fit the negative col value into the kernel
     mask(img_mid_x+col,img_mid_y+row) = kernel(col+k_size-k_size2, row+k_size-k_size2); 
   end
 end

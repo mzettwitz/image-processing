@@ -31,6 +31,7 @@ for col = 1:size(img,1)     #iterate through columns in original image
         if (col+inner_cols < 1 | col+inner_cols > size(img,1)-1 | row+inner_rows < 1 | row+inner_rows > size(img,2)-1)   
           filtered_img(col,row) += 0;
         else       #else get the value and multiply it with the kernel value/kernel-size^2
+                   #inner_cols+k_size-k_size2 to fit the negative inner_cols value into the kernel
           filtered_img(col,row) += (img(col+inner_cols,row+inner_rows)*kernel(inner_cols+k_size-k_size2, inner_rows+k_size-k_size2))/(k_size*k_size);
         end 
         
