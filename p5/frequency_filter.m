@@ -31,8 +31,15 @@ for col = (-k_size2):(k_size2)      #iterate through kernel size
 end
 
 #transform into frequency domain
-img_f = fftshift(fft2(img));
+img_f = fft2(img);
 mask_f = fft2(mask);
+
+######WHY THE FUCK DOES THIS WORK AS WELL###
+%#transform kernel into mask
+%mask = zeros(size(img));
+%mask(1:3,1:3) = kernel;
+%figure();
+%imshow(mask);
 
 #multiply image and filtermask
 filtered_img = img_f.*mask_f;
