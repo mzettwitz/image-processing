@@ -29,13 +29,13 @@ edge_sobel = [-1,2,-1];
 %2
 #test own implemented spatial filter with a smoothing filter 
 #and an edge filter, use different sizes for the filter kernel
-t = cputime;
+tic();
 smooth_im3 = spatial_filter(original, smooth3);
-smooth3_t = (t - cputime);
+smooth3_t = toc();
 
-t = cputime;
+tic();
 smooth_im5 = spatial_filter(original, smooth5);
-smooth5_t = (t - cputime);
+smooth5_t = toc();
 
 edge_im3 = spatial_filter(double(original), edge3);
 edge_imsobel = spatial_filter(double(original), edge_sobel);
@@ -60,13 +60,13 @@ title('spatial-edge-sobel-1d');
 
 %4
 #test filters in frequency domain
-t = cputime;
+tic();
 smooth_im3_f = frequency_filter(original,smooth3);
-smooth3f_t = (t - cputime);
+smooth3f_t = toc();
 
-t = cputime;
+tic();
 smooth_im5_f = frequency_filter(original,smooth5);
-smooth5f_t = (t - cputime);
+smooth5f_t = toc();
 
 edge_im3_f = frequency_filter(original, edge3);
 edge_imsobel_f = frequency_filter(original, edge_sobel);
@@ -114,9 +114,10 @@ title('diff edge3');
 %5
 #measure the computation time of both methods 
 #how does the kernel size effects the computation time?
-smooth5f_t - smooth3f_t
-smooth3_t - smooth3f_t
-smooth5_t - smooth5f_t
+difference_between_frequency_smooth3_5 = smooth5f_t - smooth3f_t
+difference_between_spatial_smooth3_5 = smooth5_t - smooth3_t
+diff_spatial_freq_3 = smooth3_t - smooth3f_t
+diff_spatial_freq_5 = smooth5_t - smooth5f_t
 
 #The spatial method is much slower than the frequency One.
 #This effect is addicted to the image size and the kernel size.
@@ -127,3 +128,9 @@ smooth5_t - smooth5f_t
 
 %additional task
 #compute and return a binomial filter using exc. 1
+bino_matrix = bino_filter(3);
+bino_im3 = spatial_filter(original, bino_matrix);
+
+figure();
+imshow(bino_im3,[]);
+title('spatial filter binomial 3x3');
