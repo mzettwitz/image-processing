@@ -37,7 +37,7 @@ tic();
 smooth_im5 = spatial_filter(original, smooth5);
 smooth5_t = toc();
 
-edge_im3 = spatial_filter(double(original), edge3);
+edge_im3 = spatial_filter(original, edge3);
 edge_imsobel = spatial_filter(double(original), edge_sobel);
 
 #show spatial filterd images
@@ -91,7 +91,7 @@ title('frequency-edge-sobel-1d');
 #compute the differences in the pictures
 diff_smooth3 = smooth_im3 - smooth_im3_f;
 diff_smooth5 = smooth_im5 - smooth_im5_f;
-diff_edge3 = edge_im3 - edge_im3_f;
+diff_edge3 = abs(edge_im3 - edge_im3_f);
 
 #show differences 
 figure();
@@ -108,8 +108,11 @@ title('diff edge3');
 
 #explain differences
 #The differences are addicted to the image borders. The borders
-#have to bee seen as an indivual problem of the spatial method.
+#have to bee seen as an individual problem of the spatial method.
 #Additionally the filters are susceptible to noise in the image.
+#A special in the differences is addicted to our implementation of
+#of the spatial filter, which translates the image a little bit.
+#So the difference will show the whole image :(
 
 %5
 #measure the computation time of both methods 
@@ -120,10 +123,11 @@ diff_spatial_freq_3 = smooth3_t - smooth3f_t
 diff_spatial_freq_5 = smooth5_t - smooth5f_t
 
 #The spatial method is much slower than the frequency One.
-#This effect is addicted to the image size and the kernel size.
-#The bigger kernel the bigger is the advantage of the frequency method.
+#This effect is addicted to the image size and the kernel size 
+#(and specially to our crappy implementation).
+#The bigger the kernel the bigger is the advantage of the frequency method.
 #If you are using a small resoluted image, the spatial method will
-#be faster, because of the expensive FFT.
+#be faster, because of the expensive FFT(excepted our crappy implementation).
 
 
 %additional task
