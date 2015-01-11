@@ -1,4 +1,4 @@
-## Authors: Martin Zettwitz, Michael Größler
+## Authors: Martin Zettwitz, Michael Grler
 ## programming task : 5
 
 close all;clear;
@@ -14,10 +14,10 @@ imshow(original,[]);
 
 #filter collection
 smooth3 = ones(3,3);
-smooth3 *= 0.9;
+smooth3 *= 1/9;
 
 smooth5 = ones(5,5);
-smooth5 *= 0.9;
+smooth5 *= 1/25;
 
 edge3 = ones(3,3);
 edge3 *= -1;
@@ -30,15 +30,15 @@ edge_sobel = [-1,2,-1];
 #test own implemented spatial filter with a smoothing filter 
 #and an edge filter, use different sizes for the filter kernel
 tic();
-smooth_im3 = spatial_filter(original, smooth3);
+smooth_im3 = spatial_filter3(original, smooth3);
 smooth3_t = toc();
 
 tic();
-smooth_im5 = spatial_filter(original, smooth5);
+smooth_im5 = spatial_filter3(original, smooth5);
 smooth5_t = toc();
 
-edge_im3 = spatial_filter(original, edge3);
-edge_imsobel = spatial_filter(double(original), edge_sobel);
+edge_im3 = spatial_filter3(original, edge3);
+edge_imsobel = spatial_filter3(double(original), edge_sobel);
 
 #show spatial filterd images
 figure();
@@ -133,7 +133,7 @@ diff_spatial_freq_5 = smooth5_t - smooth5f_t
 %additional task
 #compute and return a binomial filter using exc. 1
 bino_matrix = bino_filter(3);
-bino_im3 = spatial_filter(original, bino_matrix);
+bino_im3 = spatial_filter3(original, bino_matrix);
 
 figure();
 imshow(bino_im3,[]);
