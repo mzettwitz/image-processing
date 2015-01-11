@@ -1,5 +1,14 @@
-## Authors: Martin Zettwitz, Michael Grler
+## Authors: Martin Zettwitz, Michael Groessler
 ## programming task : 5
+
+######short explaination of of methods###########
+#spatial_filter was our first implementation, like we would do it
+#on paper.
+#spatial_filter3 (three comes from first hardcoded implementation of 3x3 kernel)
+#is a much faster version(factor 3200) that computes n*n images(addicted to kernel size)
+#and adds this images together. Each image is computed with one value of the kernel.
+#Both methods use zero padding for image borders.
+
 
 close all;clear;
 
@@ -89,8 +98,8 @@ imshow(edge_imsobel_f,[]);
 title('frequency-edge-sobel-1d');
 
 #compute the differences in the pictures
-diff_smooth3 = smooth_im3 - smooth_im3_f;
-diff_smooth5 = smooth_im5 - smooth_im5_f;
+diff_smooth3 = abs(smooth_im3 - smooth_im3_f);
+diff_smooth5 = abs(smooth_im5 - smooth_im5_f);
 diff_edge3 = abs(edge_im3 - edge_im3_f);
 
 #show differences 
@@ -110,9 +119,6 @@ title('diff edge3');
 #The differences are addicted to the image borders. The borders
 #have to bee seen as an individual problem of the spatial method.
 #Additionally the filters are susceptible to noise in the image.
-#A special in the differences is addicted to our implementation of
-#of the spatial filter, which translates the image a little bit.
-#So the difference will show the whole image :(
 
 %5
 #measure the computation time of both methods 
@@ -124,10 +130,9 @@ diff_spatial_freq_5 = smooth5_t - smooth5f_t
 
 #The spatial method is much slower than the frequency One.
 #This effect is addicted to the image size and the kernel size 
-#(and specially to our crappy implementation).
 #The bigger the kernel the bigger is the advantage of the frequency method.
-#If you are using a small resoluted image, the spatial method will
-#be faster, because of the expensive FFT(excepted our crappy implementation).
+#If you are using a small resoluted image with a small kernel, 
+#the spatial method will be faster, because of the expensive FFT.
 
 
 %additional task
