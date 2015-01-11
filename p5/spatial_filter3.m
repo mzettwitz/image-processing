@@ -1,26 +1,14 @@
-## Copyright (C) 2015 KingCotton
-## 
-## This program is free software; you can redistribute it and/or modify it
-## under the terms of the GNU General Public License as published by
-## the Free Software Foundation; either version 3 of the License, or
-## (at your option) any later version.
-## 
-## This program is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-## 
-## You should have received a copy of the GNU General Public License
-## along with this program.  If not, see <http://www.gnu.org/licenses/>.
+## Authors: Martin Zettwitz, Michael Groessler
+##programming task 5
 
-## -*- texinfo -*- 
-## @deftypefn {Function File} {@var{retval} =} spatial_filter3 (@var{input1}, @var{input2})
-##
-## @seealso{}
-## @end deftypefn
+## this function creates nxn images, where n is the size of the kernel
+## these are shifted(with a white border), multiplied with the the entry from the filterkernel
+## and added to the filtered_img
+## this reduces the computation time a lot, as one only has to use nxn computations
+## for the whole image instead of a nxn computations for every pixel
+## at the end, the white border is removed, as it is not necessary anymore
 
-## Author: KingCotton <kingcotton@kingcottonPC>
-## Created: 2015-01-11
+## if there are any further questions, please message us, as it is hard to explain without a sketch
 
 function [filtered_img] = spatial_filter3 (img, kernel)
 
@@ -40,6 +28,6 @@ for rows = 0 : k1
   end
 end
 
-filtered_img = filtered_img(k1/2+1:size(filtered_img,1)-k1/2,k2/2+1:size(filtered_img,2)-k2/2);
+filtered_img = double(filtered_img(k1/2+1:size(filtered_img,1)-k1/2,k2/2+1:size(filtered_img,2)-k2/2));
 
 endfunction
