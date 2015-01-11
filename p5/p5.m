@@ -1,4 +1,4 @@
-## Authors: Martin Zettwitz, Michael Größler
+## Authors: Martin Zettwitz, Michael Grler
 ## programming task : 5
 
 close all;clear;
@@ -14,10 +14,10 @@ imshow(original,[]);
 
 #filter collection
 smooth3 = ones(3,3);
-smooth3 *= 0.9;
+smooth3 *= 1/9;
 
 smooth5 = ones(5,5);
-smooth5 *= 0.9;
+smooth5 *= 1/25;
 
 edge3 = ones(3,3);
 edge3 *= -1;
@@ -34,6 +34,10 @@ smooth_im3 = spatial_filter(original, smooth3);
 smooth3_t = toc();
 
 tic();
+smooth_new_img = spatial_filter2(original,smooth3);
+smooth_new = toc();
+
+tic();
 smooth_im5 = spatial_filter(original, smooth5);
 smooth5_t = toc();
 
@@ -41,6 +45,11 @@ edge_im3 = spatial_filter(double(original), edge3);
 edge_imsobel = spatial_filter(double(original), edge_sobel);
 
 #show spatial filterd images
+
+figure();
+imshow(smooth_new_img,[]);
+title('spatial new');
+
 figure();
 imshow(smooth_im3,[]);
 title('spatial-smooth-3');
