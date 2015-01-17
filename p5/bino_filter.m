@@ -1,4 +1,4 @@
-## Copyright (C) 2014 Martin Zettwitz, Michael Größler
+## Copyright (C) 2014 Martin Zettwitz, Michael Groessler
 
 %additional task
 ##abstract

@@ -1,4 +1,5 @@
-## Copyright (C) 2014 Martin Zettwitz, Michael Größler
+## Authors: Martin Zettwitz, Michael Groessler
+## programming task 5
 
 %3
 ##abstract
