@@ -27,38 +27,58 @@ title('original histogram');
 
 %3
 ##seperate background using ordered filter##
-n = 35;
+n = 65; #(35 for min/max, 65 for med)
 domain = true (n,n);
-%bg1 = ordfiltn(original, 1, dom);      #minimum filter
-%bg2 = ordfiltn(original, floor(n*n/2), dom);  #mediam filter
-bg3 = ordfiltn(original, n*n, domain);  #maximum filter
+%bg_shade = ordfiltn(original, 1, domain, 'symmetric');      #minimum filter
+bg_shade = ordfiltn(original, floor(n*n/2) , domain, 'symmetric');  #median filter
+%bg_shade = ordfiltn(original, n*n, domain, 'symmetric');  #maximum filter
 
-#separate the image into three parts to get combine the orderd filters
-#minimum for black backgorund, median for grey and maximum for white
-#produces bugs(bounding boxes) if contrast doesn't fit the filter
-#solution: interpolation
+figure();
+imshow(bg_shade);
+title('shading image');
 
+#minum: produces artifacts in light parts of the image
+#medium: good filtering of background, but doesn't get all objects
+#maximum: produces "bounding boxes" in dark part of the image
+
+
+##test ideas##
+###########################################################
+#For better results separate the image into three parts to get 
+#combine the orderd filters minimum for black backgorund, 
+#median for grey and maximum for white.
+#Produces bugs(bounding boxes) if contrast doesn't fit the filter
+#(as you can see using the maximumfilter)
+#solution: interpolation between the results
+
+####following: try to combine the the separated images####
+####bg1 - bg3 = 3 different versions of bg_shade(renamed)
 %bg = original;
 #separation
 %o_1 = original-bg1;
 %o_2 = imabsdiff(original,bg2);
 %o_3 = bg3-original;
 
-
-%4
-##combine the separated images##
-bg = bg3-original;
+#combine them
 %bg_3 = uint16(floor(size(bg,2)/3));
 %bg(1:size(bg,1),2*bg_3:3*bg_3) = o_3(1:size(bg,1),2*bg_3:3*bg_3);
 %bg(1:size(bg,1),bg_3:2*bg_3) = o_2(1:size(bg,1),bg_3:2*bg_3);
 %bg(1:size(bg,1),1:bg_3) = o_1(1:size(bg,1),1:bg_3);
-%bg = im2bw(bg, graythresh(bg));
+%bg = im2bw(bg, 0.05);
+############################################################
+
+
+
+%4
+##separate the background from the foreground, get binary image##
+bg = original-bg_shade; #minimum and median filter
+%bg = bg_shade-original; #for maximum filter
 bg = im2bw(bg, 0.05);
 
 ##show segmented image
 figure();
-imshow(bg, []);
-title('background using ordered filter');
+imshow(bg);
+title('segmentation using ordered filter');
 
 
 %5
@@ -109,4 +129,4 @@ segment = ordfiltn(segment, 1, domain);
 ##show the segmented image##
 figure();
 imshow(segment);
-title('segmented image by using keeping peaks');
+title('segmentation by keeping peaks');
