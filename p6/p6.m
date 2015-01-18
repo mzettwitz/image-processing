@@ -53,6 +53,7 @@ bg = bg3-original;
 %bg(1:size(bg,1),bg_3:2*bg_3) = o_2(1:size(bg,1),bg_3:2*bg_3);
 %bg(1:size(bg,1),1:bg_3) = o_1(1:size(bg,1),1:bg_3);
 %bg = im2bw(bg, graythresh(bg));
+bg = im2bw(bg, 0.05);
 
 ##show segmented image
 figure();
@@ -61,7 +62,7 @@ title('background using ordered filter');
 
 
 %5
-##alternative##
+##alternative solution##
 ##abstract##
 #Assumption: all interesting things are peaks
 #in the histogram. We delete all grey values that
